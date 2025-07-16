@@ -1,0 +1,125 @@
+In-built functional interfaces
+
+we can import it from : java.util.function
+
+1. Consumer
+
+	@FunctionalInterface
+	public interface Consumer<T> {
+		void accept(T t)
+	}
+
+2. Supplier
+	package: java.util.function
+	@FunctionalInterface
+	public interface Supplier<T>  {
+		T get()
+	}
+	
+	use of supplier is when we want to create a multithreaded application
+
+3. Predicate
+	package: java.util.function
+	@FunctionalInterface
+	public interface Predicate<T> {
+		Boolean test(T t);
+	}
+
+4. Function
+	package: java.util.function
+	@FunctionalInterface
+	public interface Function<T, R> {
+		R apply(T t);
+	}
+
+=========================================================================================================================================
+
+API Design
+
+	"Design to interface, not implement"
+
+	public interface intf1 {
+		public void x();
+	}
+
+	public interface intf2 extends intf2 {
+		public void y();
+	}
+
+	// implementer 1
+	
+	class intf1impl1 implements intf1 {
+		public void x() {}
+		public void y() {}     xxxxxx
+	}
+
+	// implementer 2
+	
+	class intf1impl2 implements intf1 {
+		
+	}
+
+	==========================================
+
+	public interface intf {
+		void x();
+	}
+
+	public class imp1 implements intf {
+		void x() {}
+	}
+
+	public class imp2 implements intf {
+		void x() {}
+	}
+
+	/** we have to create a utility class in case we have to do operations simultaneously on all 
+	  * classes that implement the interface
+	  */
+
+	class utilityIntf {
+		public static void doOp(intf[] interfaces) {
+			
+		}
+	}
+
+	/**
+	we can also put the static method in the interface itself eliminating the need for the utility class
+	*/
+
+=========================================================================================================================================
+
+class BoxOfObject {
+	private Object Data;
+	
+	public void setData(Object Data) {
+		this.data = data;
+	}
+
+	public Object getData() {
+		return Data;
+	}
+
+	public static void main(String args[]) {
+		BoxOfObject box = new BoxOfObject();
+		box.setData("b1"); // uchecked 
+
+		String data = (String)box.getData();
+		Integer data = (Integer)box.getData(); // returns a ClassCastException
+
+		// we can do it like this. but this is highly ineffective as we need to keep on writing if 
+
+		if(box.getData() instanceof Integer) {
+			Integer data = (Integer)box.getData();
+		}
+		if(box.getData() instanceof String) {
+			String data = (String)box.getData();
+		}
+	}
+}
+
+Box<String> boxOfString = new Box<String>();
+boxOfString.setData('thankan');
+boxOfString.setData(10); // returns an error
+
+String data = boxOfString.getData();
