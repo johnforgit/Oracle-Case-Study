@@ -8,10 +8,10 @@ CREATE TABLE PRODUCT (
     description VARCHAR(30)
 );
 
--- 2. Asset Table
+-- 2. Asset Table (with stddev and var_value added for VaR)
 CREATE TABLE ASSET (
     asset_id INT AUTO_INCREMENT PRIMARY KEY,
-    asset_type VARCHAR(50),             -- increased size for flexibility
+    asset_type VARCHAR(50),
     asset_value INT,
     maturity_date DATE,
     interest_rate DECIMAL(7,4),
@@ -21,10 +21,12 @@ CREATE TABLE ASSET (
     asset_status VARCHAR(10),
     prod_id INT,
     is_rate_sensitive BOOLEAN DEFAULT FALSE,
+    stddev DECIMAL(15,6),
+    var_value DECIMAL(20,2),
     CONSTRAINT FK_ASSET_PRODUCT FOREIGN KEY (prod_id) REFERENCES PRODUCT(prod_id) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
--- 3. Liability Table
+-- 3. Liability Table (with stddev and var_value added for VaR)
 CREATE TABLE LIABILITY (
     liability_id INT AUTO_INCREMENT PRIMARY KEY,
     liability_type VARCHAR(50),
@@ -37,11 +39,12 @@ CREATE TABLE LIABILITY (
     liability_status VARCHAR(10),
     prod_id INT,
     is_rate_sensitive BOOLEAN DEFAULT FALSE,
+    stddev DECIMAL(15,6),
+    var_value DECIMAL(20,2),
     CONSTRAINT FK_LIABILITY_PRODUCT FOREIGN KEY (prod_id) REFERENCES PRODUCT(prod_id) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- 4. Interest Income/Expense Table
--- 4. Interest Income/Expense Table (Updated)
 CREATE TABLE INTEREST_INCOME_EXPENSE (
     id INT AUTO_INCREMENT PRIMARY KEY,
     asset_id INT NULL,
@@ -49,29 +52,11 @@ CREATE TABLE INTEREST_INCOME_EXPENSE (
     entry_type ENUM('income', 'expense') NOT NULL,
     period DATE NOT NULL,
     amount DECIMAL(20,2) NOT NULL,
-    -- One of asset_id or liability_id must be NOT NULL (enforce via application or triggers)
     CONSTRAINT FK_IIE_ASSET FOREIGN KEY (asset_id) REFERENCES ASSET(asset_id) ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT FK_IIE_LIABILITY FOREIGN KEY (liability_id) REFERENCES LIABILITY(liability_id) ON DELETE SET NULL ON UPDATE CASCADE,
     INDEX idx_asset_id (asset_id),
     INDEX idx_liability_id (liability_id)
 );
-
--- 6. Maturing Cash Flow Table (Updated)
-CREATE TABLE MATURING_CASH_FLOW (
-    flow_id INT AUTO_INCREMENT PRIMARY KEY,
-    asset_id INT NULL,
-    liability_id INT NULL,
-    bucket_id INT NOT NULL,
-    amount DECIMAL(20,2) NOT NULL,
-    inflow_or_outflow ENUM('inflow', 'outflow') NOT NULL,
-    -- One of asset_id or liability_id must be NOT NULL (enforce via application or triggers)
-    CONSTRAINT FK_MCF_ASSET FOREIGN KEY (asset_id) REFERENCES ASSET(asset_id) ON DELETE SET NULL ON UPDATE CASCADE,
-    CONSTRAINT FK_MCF_LIABILITY FOREIGN KEY (liability_id) REFERENCES LIABILITY(liability_id) ON DELETE SET NULL ON UPDATE CASCADE,
-    CONSTRAINT FK_MATURING_CASH_FLOW_TIME_BUCKET FOREIGN KEY (bucket_id) REFERENCES TIME_BUCKET(bucket_id) ON DELETE CASCADE ON UPDATE CASCADE,
-    INDEX idx_asset_id (asset_id),
-    INDEX idx_liability_id (liability_id)
-);
-
 
 -- 5. Time Bucket Table
 CREATE TABLE TIME_BUCKET (
@@ -82,6 +67,19 @@ CREATE TABLE TIME_BUCKET (
 );
 
 -- 6. Maturing Cash Flow Table
+CREATE TABLE MATURING_CASH_FLOW (
+    flow_id INT AUTO_INCREMENT PRIMARY KEY,
+    asset_id INT NULL,
+    liability_id INT NULL,
+    bucket_id INT NOT NULL,
+    amount DECIMAL(20,2) NOT NULL,
+    inflow_or_outflow ENUM('inflow', 'outflow') NOT NULL,
+    CONSTRAINT FK_MCF_ASSET FOREIGN KEY (asset_id) REFERENCES ASSET(asset_id) ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT FK_MCF_LIABILITY FOREIGN KEY (liability_id) REFERENCES LIABILITY(liability_id) ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT FK_MATURING_CASH_FLOW_TIME_BUCKET FOREIGN KEY (bucket_id) REFERENCES TIME_BUCKET(bucket_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    INDEX idx_asset_id (asset_id),
+    INDEX idx_liability_id (liability_id)
+);
 
 -- 7. Duration Metric Table
 CREATE TABLE DURATION_METRIC (
@@ -92,18 +90,17 @@ CREATE TABLE DURATION_METRIC (
     duration_value DECIMAL(10,4),
     CONSTRAINT FK_DURATION_ASSET FOREIGN KEY (asset_id) REFERENCES ASSET(asset_id) ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT FK_DURATION_LIABILITY FOREIGN KEY (liability_id) REFERENCES LIABILITY(liability_id) ON DELETE SET NULL ON UPDATE CASCADE,
-    -- Consider application-level check to ensure one of asset_id or liability_id is not null
     INDEX idx_asset_id (asset_id),
     INDEX idx_liability_id (liability_id)
 );
 
--- 8. Risk/Market Data Table (VaR)
+-- 8. Risk/Market Data Table (can be used to store reference stddev/z/t)
 CREATE TABLE RISK_MARKET_DATA (
     risk_id INT AUTO_INCREMENT PRIMARY KEY,
     reporting_date DATE NOT NULL,
     stddev DECIMAL(15,6),
     z_factor DECIMAL(6,4),
-    time_horizon INT, -- days
+    time_horizon INT,
     portfolio_value DECIMAL(20,2),
     var_value DECIMAL(20,2)
 );
@@ -122,12 +119,20 @@ CREATE TABLE ASSET_COVERAGE_COMPONENT (
 -- 10. Calculation Result Table
 CREATE TABLE CALCULATION_RESULT (
     calculation_id INT AUTO_INCREMENT PRIMARY KEY,
-    calculation_type VARCHAR(50) NOT NULL, -- e.g., 'Gap', 'NIM', 'Duration'
+    calculation_type VARCHAR(50) NOT NULL,
     result_value DECIMAL(20,6),
     reporting_date DATE,
     parameters_used TEXT,
     remarks VARCHAR(255)
 );
 
--- Show all tables after creation
-SHOW TABLES;
+-- 11. Customer Table (newly added)
+CREATE TABLE CUSTOMER (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    date_of_birth DATE,
+    email VARCHAR(100),
+    phone VARCHAR(15),
+    address TEXT,
+    risk_profile VARCHAR(20)
+);
