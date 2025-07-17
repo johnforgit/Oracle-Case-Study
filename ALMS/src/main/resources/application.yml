@@ -1,0 +1,6 @@
+spring:
+    application:
+      name: ALMS
+      
+server:
+   port: 8081
