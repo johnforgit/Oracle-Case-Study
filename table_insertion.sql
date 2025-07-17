@@ -114,3 +114,15 @@ INSERT INTO ASSET_COVERAGE_COMPONENT (comp_id, bvta, ia, cl, stdo, total_debt, r
 (8, 23500000.00, 3700000.00, 1350000.00, 570000.00, 18500000.00, '2026-01-31'),
 (9, 24000000.00, 3800000.00, 1400000.00, 580000.00, 19000000.00, '2026-02-28'),
 (10, 24500000.00, 3900000.00, 1450000.00, 590000.00, 19500000.00, '2026-03-31');
+
+INSERT INTO CALCULATION_RESULT (calculation_type, result_value, reporting_date, parameters_used, remarks) VALUES
+('Gap', 2500000.123456, '2025-06-30', 'bucket=Q2 2025', 'Positive gap observed'),
+('NIM', 1.875000, '2025-06-30', 'period=Q2 2025', 'Net Interest Margin'),
+('Duration', 5.1234, '2025-06-30', 'asset_id=1', 'Duration for asset 1'),
+('Duration', 3.9876, '2025-06-30', 'liability_id=1', 'Duration for liability 1'),
+('Gap', -1500000.000000, '2025-07-31', 'bucket=Q3 2025', 'Negative gap observed'),
+('NIM', 1.900000, '2025-07-31', 'period=Q3 2025', 'Improved NIM'),
+('Duration', 6.0000, '2025-07-31', 'asset_id=3', 'Duration for asset 3'),
+('Duration', 4.2500, '2025-07-31', 'liability_id=3', 'Duration for liability 3'),
+('Gap', 500000.000000, '2025-08-31', 'bucket=Q4 2025', 'Positive gap observed'),
+('NIM', 1.850000, '2025-08-31', 'period=Q4 2025', 'NIM stabilized');
