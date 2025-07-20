@@ -5,30 +5,15 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/ALM
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: "root"
-    password: "root"
+    username: root
+    password: root
 
   jpa:
-    database-platform: org.eclipse.persistence.platform.database.MySQLPlatform
     show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
 
 server:
   port: 8081
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  httpexchanges:
-    recording:
-      enabled: true
-  info:
-    env:
-      enabled: true
-
-info:
-  app:
-    name: "ALMS App"
-    version: 1.0.0
-    description: "description"
