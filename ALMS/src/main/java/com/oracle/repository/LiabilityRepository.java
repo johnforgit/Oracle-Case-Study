@@ -13,4 +13,7 @@ public interface LiabilityRepository extends CrudRepository<Liability, Integer> 
 
     @Query("SELECT COALESCE(SUM(l.liabilityValue), 0) FROM Liability l WHERE l.isRateSensitive = true")
     BigDecimal getTotalRateSensitiveLiabilities();
+    @Query("SELECT COALESCE(SUM(l.liabilityValue), 0) FROM Liability l")
+    BigDecimal getTotalLiabilityValue();
+
 }
