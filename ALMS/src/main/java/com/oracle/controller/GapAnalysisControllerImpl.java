@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.oracle.service.GapAnalysisService;
+import com.oracle.dto.GapAnalysisDTO;
 
 @RestController
 @RequestMapping("api")
@@ -21,16 +22,17 @@ public class GapAnalysisControllerImpl implements GapAnalysisController {
     @Autowired
     private GapAnalysisService gapAnalysisService;
 
-    @Override
     @GetMapping("gap-analysis")
+    @Override
     public ResponseEntity<?> getGap() {
         BigDecimal gap = gapAnalysisService.calculateGap();
         if (gap != null) {
-            Map<String, Object> response = new HashMap<>();
-            response.put("gapValue", gap);
-            response.put("gapType", gap.signum() > 0 ? "Asset-sensitive" : gap.signum() < 0 ? "Liability-sensitive" : "Neutral");
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            String gapType = gap.signum() > 0 ? "Asset-sensitive" :
+                             gap.signum() < 0 ? "Liability-sensitive" : "Neutral";
+            GapAnalysisDTO dto = new GapAnalysisDTO(gap, gapType);
+            return new ResponseEntity<>(dto, HttpStatus.OK);
         }
         return new ResponseEntity<>("Unable to calculate gap", HttpStatus.NOT_FOUND);
     }
+
 }

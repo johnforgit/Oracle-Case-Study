@@ -13,4 +13,7 @@ public interface AssetRepository extends CrudRepository<Asset, Integer> {
 
     @Query("SELECT COALESCE(SUM(a.assetValue), 0) FROM Asset a WHERE a.isRateSensitive = true")
     BigDecimal getTotalRateSensitiveAssets();
+    @Query("SELECT COALESCE(AVG(a.assetValue), 0) FROM Asset a WHERE a.assetValue > 0")
+    BigDecimal getAverageEarningAssets();
+
 }

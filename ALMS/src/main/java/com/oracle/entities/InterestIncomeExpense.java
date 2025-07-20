@@ -47,7 +47,7 @@ public class InterestIncomeExpense {
     private BigDecimal amount;
 
     public enum EntryType {
-        income, expense
+        income, expense, EXPENSE, INCOME
     }
 	
     public InterestIncomeExpense() {}
