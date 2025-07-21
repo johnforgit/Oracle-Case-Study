@@ -4,6 +4,9 @@ package com.oracle.dto;
 
 import java.math.BigDecimal;
 
+import lombok.Data;
+
+@Data
 public class LiquidityGapDTO {
     private String bucketLabel;
     private BigDecimal inflow;
@@ -17,21 +20,4 @@ public class LiquidityGapDTO {
         this.gap = inflow.subtract(outflow);
     }
 
-    public String getBucketLabel() {
-        return bucketLabel;
-    }
-
-    public BigDecimal getInflow() {
-        return inflow;
-    }
-
-    public BigDecimal getOutflow() {
-        return outflow;
-    }
-
-    public BigDecimal getGap() {
-        return gap;
-    }
-
-    // Optional: toString(), equals(), hashCode()
 }

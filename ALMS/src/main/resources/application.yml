@@ -17,3 +17,24 @@ spring:
 server:
   port: 8081
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # Expose all actuator endpoints
+  endpoint:
+    health:
+      show-details: always
+    info:
+      enabled: true
+
+info:
+  app:
+    name: ALMS - Asset Liability Management System
+    version: 1.0.0
+    description: API for Risk and Performance Metrics in Financial Institutions
+
+logging:
+  level:
+    root: INFO
+    com.oracle: DEBUG

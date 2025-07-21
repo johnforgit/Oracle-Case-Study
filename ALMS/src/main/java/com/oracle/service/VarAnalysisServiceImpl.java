@@ -22,7 +22,7 @@ public class VarAnalysisServiceImpl implements VarAnalysisService {
 
         if (data == null) return BigDecimal.ZERO;
 
-        BigDecimal z = data.getzFactor();
+        BigDecimal z = data.getZFactor();
         BigDecimal stddev = data.getStddev();
         BigDecimal time = BigDecimal.valueOf(Math.sqrt(data.getTimeHorizon()));
         BigDecimal portfolio = data.getPortfolioValue();

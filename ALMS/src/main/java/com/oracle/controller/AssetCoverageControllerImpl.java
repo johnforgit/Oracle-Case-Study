@@ -3,6 +3,7 @@ package com.oracle.controller;
 import com.oracle.dto.AssetCoverageRatioDTO;
 import com.oracle.service.AssetCoverageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
