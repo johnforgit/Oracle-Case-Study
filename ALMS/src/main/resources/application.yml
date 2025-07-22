@@ -14,6 +14,12 @@ spring:
     hibernate:
       ddl-auto: none
 
+  boot:
+    admin:
+      client:
+        enabled: true
+        url: http://localhost:8091
+
 server:
   port: 8081
 
