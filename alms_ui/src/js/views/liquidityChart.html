@@ -1,0 +1,36 @@
+<div class="oj-flex">
+  <div class="oj-flex-item">
+    <label>Orientation:</label>
+    <select data-bind="value: orientationValue">
+      <option value="vertical">Vertical</option>
+      <option value="horizontal">Horizontal</option>
+    </select>
+  </div>
+
+  <div class="oj-flex-item" style="margin-left: 20px;">
+    <label>Stack:</label>
+    <select data-bind="value: stackValue">
+      <option value="off">Off</option>
+      <option value="on">On</option>
+    </select>
+  </div>
+</div>
+
+<oj-chart
+  id="barChart"
+  type="bar"
+  orientation="[[orientationValue]]"
+  stack="[[stackValue]]"
+  data="[[dataProvider]]"
+  animation-on-display="auto"
+  animation-on-data-change="auto"
+  hover-behavior="dim"
+  style="width:100%; height:400px; margin-top:20px;">
+  <template slot="itemTemplate" data-oj-as="item">
+    <oj-chart-item
+      value="[[item.data.value]]"
+      group-id="[[ [item.data.group] ]]"
+      series-id="[[item.data.series]]">
+    </oj-chart-item>
+  </template>
+</oj-chart>
