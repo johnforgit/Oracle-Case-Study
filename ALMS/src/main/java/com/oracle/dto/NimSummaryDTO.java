@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 public class NimSummaryDTO {
 	@NotNull
 	@Schema(description = "Year", example = "2025")
-    private BigInteger year;
+    private Integer year;
 	
 	@Schema(description = "Average Income for the Year", example = "150.00")
     private BigDecimal income;
@@ -22,7 +22,7 @@ public class NimSummaryDTO {
 
 	public NimSummaryDTO() {}
 	
-	public NimSummaryDTO(BigInteger year, BigDecimal income, BigDecimal expense, BigDecimal nim) {
+	public NimSummaryDTO(Integer year, BigDecimal income, BigDecimal expense, BigDecimal nim) {
 		this.year=year;
 		this.income=income;
 		this.expense=expense;

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.oracle.dto.AvgActiveAssetByYearDTO;
 import com.oracle.entities.Asset;
 
 @Repository
@@ -41,5 +42,5 @@ public interface AssetRepository extends CrudRepository<Asset, Integer> {
 			) AS years
 			ORDER BY maturity_year;
     		""",nativeQuery =true)
-    Map<String,BigDecimal> getAverageActiveAssetsPerYear();
+   List<Map<String,String>> getAverageActiveAssetsPerYear();
 }

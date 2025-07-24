@@ -1,8 +1,10 @@
 package com.oracle.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,21 +37,42 @@ public class NimAnalysisServiceImpl implements NimAnalysisService {
         return income.subtract(expense).divide(avgAssets, 6, BigDecimal.ROUND_HALF_UP);
     }
 
-	@Override
-	public List<Object[]> computeNIM() {
-		Map<String,BigDecimal> avgAssets = assetRepo.getAverageActiveAssetsPerYear();
-		List<Object[]> fetchedInterestIncomeExpense = interestRepo.getAnnualIncomeExpenseSummary();
+	
+	public List<Map<String,String>> computeNIM() {
+	
+		List<Map<String,String>> avgAssets = assetRepo.getAverageActiveAssetsPerYear();
+		List<Map<String,Double>> fetchedInterestIncomeExpense = interestRepo.getAnnualIncomeExpenseSummary();
 		
-		List<Object[]> returnData =new ArrayList<>();
+		Map<String,String> map=new HashMap<>();
+		List<Map<String,String>> returnData =new ArrayList<>();
+		
+		avgAssets.forEach(System.out::println);
+		
+		avgAssets
+		.stream()
+		.forEach((data)->{
+			map.put(String.valueOf(data.get("maturity_year")), String.valueOf(data.get("cumulative_avg")));
+		});
+		
+
 		
 		fetchedInterestIncomeExpense
 		.stream()
-		.forEach((data)->{
-			Object[] o = new Object[data.length+1];
-			o[0]=data[0];
-			o[1]=(BigDecimal)data[1];
-			o[2]=(BigDecimal)data[2];
-			o[3]= ((BigDecimal)o[1]).subtract((BigDecimal)o[2]).divide(avgAssets.get((String)o[0]));
+		.forEach((data)->{	
+			Map<String,String> o=new HashMap<>();
+			BigDecimal i=new BigDecimal(String.valueOf(data.get("income")));
+			BigDecimal e=new BigDecimal(String.valueOf(data.get("expense")));
+			BigDecimal avg=new BigDecimal(map.getOrDefault(String.valueOf(data.get("year")),"1"));
+			o.put("year", String.valueOf(data.get("year")));
+			o.put("income", i.toString());
+			o.put("expense", e.toString());
+			System.out.println(i);
+			System.out.println(e);
+			System.out.println(i.subtract(e));
+//			System.out.println(i.subtract(e).divide(avg));
+			System.out.println(10327.50/985714.2857);
+			System.out.println(avg);
+			o.put("nim", ((i.subtract(e)).divide(avg,8, RoundingMode.HALF_UP)).toString());
 			returnData.add(o);
 		});
 		return returnData;

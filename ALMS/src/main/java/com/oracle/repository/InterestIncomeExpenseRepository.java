@@ -3,6 +3,7 @@ package com.oracle.repository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -19,12 +20,12 @@ public interface InterestIncomeExpenseRepository extends CrudRepository<Interest
     BigDecimal getTotalByTypeAndPeriod(EntryType type, LocalDate startDate, LocalDate endDate);
 
     @Query("""
-    	    SELECT YEAR(i.period) AS yr,
+    	    SELECT YEAR(i.period) AS year,
     	           SUM(CASE WHEN i.entryType = 'INCOME' THEN i.amount ELSE 0 END) AS income,
     	           SUM(CASE WHEN i.entryType = 'EXPENSE' THEN i.amount ELSE 0 END) AS expense
     	    FROM InterestIncomeExpense i
     	    GROUP BY YEAR(i.period)
-    	    ORDER BY yr
+    	    ORDER BY year
     	""")
-    List<Object[]> getAnnualIncomeExpenseSummary();
+    List<Map<String,Double>> getAnnualIncomeExpenseSummary();
 }
