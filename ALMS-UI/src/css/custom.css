@@ -1,0 +1,65 @@
+/* Center the gauge and add padding */
+.gap-gauge-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+/* Style for the meter gauge */
+.gap-gauge {
+  width: 200px;
+  height: 200px;
+  --oj-gauge-bar-fill-color: #6d080d;
+}
+
+
+/* Text label for gap type */
+.gap-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin-left: 2rem;
+}
+
+/* Container for the entire ACR gauge panel */
+.acr-gauge-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 24px;
+  padding: 16px;
+  background-color: #f4f6f8;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 300px;
+}
+
+/* Customize the size of the gauge itself */
+oj-status-meter-gauge.acr-gauge {
+  width: 200px;
+  height: 200px;
+  --oj-gauge-bar-fill-color: var(--acr-gauge-bar-color); /* set via JS */
+  --oj-gauge-bar-background-color: #e0e0e0;
+  --oj-gauge-label-font-size: 14px;
+}
+
+/* Optional: better layout for label below gauge */
+.acr-label {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+}
+
+/* Style the ratio text inside the label */
+.acr-label oj-bind-text {
+  font-weight: bold;
+  color: #000;
+}
+
