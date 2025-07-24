@@ -1,0 +1,41 @@
+<div class="oj-flex">
+  <!-- Date Picker -->
+  <div class="oj-flex-item">
+    <label for="acr-date">Select Date:</label>
+    <oj-input-date
+      id="acr-date"
+      value="{{reportingDate}}"
+      label-hint="Reporting Date"
+      autocomplete="off"
+      required="true"
+      class="oj-form-control">
+    </oj-input-date>
+  </div>
+</div>
+
+<div class="acr-gauge-container">
+  <oj-status-meter-gauge 
+    value="[[acrValue]]"
+    min="0"
+    max="3"
+    orientation="circular"
+    inner-radius="0.75"
+    start-angle="180"
+    angle-extent="180"
+    metric-label.rendered="on"
+    color="[[gaugeColor]]"
+    label.text="Asset Coverage Ratio"
+    readonly="true">
+  </oj-status-meter-gauge>
+
+  <div class="acr-label">
+    <div>Coverage Ratio:</div>
+    <oj-bind-text value="[[acrValue]]"></oj-bind-text>
+  </div>
+  <div class="acr-details">
+  <div><strong>Book Value of Total Assets (BVTA):</strong> <oj-bind-text value="[[bvta]]"></oj-bind-text></div>
+  <div><strong>Intangible Assets (IA):</strong> <oj-bind-text value="[[ia]]"></oj-bind-text></div>
+  <div><strong>Current Liabilities (CL):</strong> <oj-bind-text value="[[cl]]"></oj-bind-text></div>
+  <div><strong>Total Debt:</strong> <oj-bind-text value="[[totalDebt]]"></oj-bind-text></div>
+</div>
+</div>
