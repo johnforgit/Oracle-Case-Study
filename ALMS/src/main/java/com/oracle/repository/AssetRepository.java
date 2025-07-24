@@ -1,6 +1,7 @@
 package com.oracle.repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,6 +18,7 @@ public interface AssetRepository extends CrudRepository<Asset, Integer> {
     BigDecimal getAverageEarningAssets();
     @Query("SELECT COALESCE(SUM(a.assetValue), 0) FROM Asset a")
     BigDecimal getTotalAssetValue();
-
+    @Query("SELECT a FROM Asset a")
+    List<Asset> getAssets();
 
 }

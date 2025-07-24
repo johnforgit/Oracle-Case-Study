@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*") 
 public class VarAnalysisControllerImpl implements VarAnalysisController {
 
     @Autowired

@@ -1,6 +1,7 @@
 package com.oracle.controller;
 
 import com.oracle.dto.AssetCoverageRatioDTO;
+import com.oracle.dto.AssetDTO;
 import com.oracle.service.AssetCoverageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("api")
@@ -24,5 +26,13 @@ public class AssetCoverageControllerImpl implements AssetCoverageController {
         if (result == null)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(result);
+    }
+    
+    @GetMapping("assets")
+    public ResponseEntity<?> getAssets(){
+    	List<AssetDTO> result = assetCoverageService.allAssets();
+    	if(result == null)
+    		return ResponseEntity.notFound().build();
+    	return ResponseEntity.ok(result);
     }
 }
