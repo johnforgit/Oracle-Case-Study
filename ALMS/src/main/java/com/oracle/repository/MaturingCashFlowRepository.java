@@ -13,6 +13,6 @@ public interface MaturingCashFlowRepository extends CrudRepository<MaturingCashF
 @Query("SELECT m.bucket.label, " +
 "SUM(CASE WHEN m.inflowOrOutflow = 'inflow' THEN m.amount ELSE 0 END), " +
 "SUM(CASE WHEN m.inflowOrOutflow = 'outflow' THEN m.amount ELSE 0 END) " +
-"FROM MaturingCashFlow m GROUP BY m.bucket.label")
+"FROM MaturingCashFlow m GROUP BY m.bucket.label ORDER BY m.bucket.bucketId")
 List<Object[]> getLiquidityGapsByBucket();
 }

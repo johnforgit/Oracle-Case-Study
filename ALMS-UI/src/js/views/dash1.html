@@ -1,0 +1,27 @@
+<div id="sampleDemo" class="demo-padding demo-container">
+        <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+                  
+          <div id="line-chart-container">
+            <oj-c-line-chart
+              data="[[dataProvider]]"
+              orientation="[[orientationValue]]"
+              hover-behavior="dim">
+              <template slot="itemTemplate" data-oj-as="item">
+                  <oj-c-line-chart-item
+                      value="[[item.data.value]]"
+                      group-id="[[ [item.data.groupId] ]]"
+                      series-id="[[item.data.series]]"> 
+                  </oj-c-line-chart-item>
+              </template>
+            </oj-c-line-chart>
+             <!-- vertical/horizontal toggle button -->
+         <demo-chart-orientation-control
+             type="line"
+             orientation="{{orientationValue}}"
+             ></demo-chart-orientation-control>
+          </div>
+          
+          
+          
+        </div>
+      </div>
