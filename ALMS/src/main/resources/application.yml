@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ALMS
+    name: ReportingService
 
   datasource:
     url: jdbc:mysql://localhost:3306/ALM
@@ -44,3 +44,14 @@ logging:
   level:
     root: INFO
     com.oracle: DEBUG
+
+eureka: 
+  instance:
+    hostname: ${vcap.application.uris[0]:localhost}
+    metadata-map:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+  client:
+    region: default
+    registry-fetch-interval-seconds: 5
+    service-url:
+      default-zone: http://localhost:8761/eureka/

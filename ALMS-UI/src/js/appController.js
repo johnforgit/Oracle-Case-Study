@@ -32,14 +32,14 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojrespon
 
       let navData = [
         { path: '', redirect: 'dashboard' },
-        { path: 'dashboard', detail: { label: 'Dashboard', iconClass: 'oj-ux-ico-bar-chart' } },
+        { path: 'gapGauge', detail: { label: 'Dashboard', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'dash1', detail: { label: 'VAR Analysis', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'dash2', detail: { label: 'Duration Gap', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'nimDashBoard', detail: { label: 'NIM DashBoard', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'liquidityChart', detail: { label: 'Liquidity Chart', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'incidents', detail: { label: 'Incidents', iconClass: 'oj-ux-ico-fire' } },
         { path: 'customers', detail: { label: 'Customers', iconClass: 'oj-ux-ico-contact-group' } },
-        { path: 'about', detail: { label: 'About', iconClass: 'oj-ux-ico-information-s' } }
+        { path: 'assetCoverageGauge', detail: { label: 'ASC', iconClass: 'oj-ux-ico-information-s' } }
       ];
       // Router setup
       let router = new CoreRouter(navData, {
