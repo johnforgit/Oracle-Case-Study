@@ -1,6 +1,6 @@
 <div class="grid-container">
     <div class="chart-box">
-        <h3 style="margin-bottom: 10px;">Asset Types</h2>
+        <h3 style="margin-bottom: 10px;">Liability Types</h2>
         <div id="sampleDemo" class="demo-padding demo-container">
         <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
                   
@@ -8,7 +8,7 @@
             <oj-chart
               id="pieChart"
               type="pie"
-              data="[[dataProvider1]]"
+              data="[[dataProvider3]]"
               animation-on-display="auto"
               animation-on-data-change="auto"
               hover-behavior="dim">
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="chart-box">
-        <h3 style="margin-bottom: 10px;">Asset Value Distribution</h2>
+        <h3 style="margin-bottom: 10px;">Liability Value Distribution</h2>
         <div id="sampleDemo" class="demo-padding demo-container">
         <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
                   
@@ -35,7 +35,7 @@
             <oj-chart
               id="pieChart"
               type="pie"
-              data="[[dataProvider2]]"
+              data="[[dataProvider4]]"
               animation-on-display="auto"
               animation-on-data-change="auto"
               hover-behavior="dim">
@@ -55,9 +55,9 @@
     </div>
     <div class="chart-box">
         <div class="asset-widget">
-        <div class="widget-header">Total Active Asset Value</div>
+        <div class="widget-header">Total Active Liability Value</div>
         <div class="widget-body">
-            <div class="value" data-bind="text: totalAssetValue"></div>
+            <div class="value" data-bind="text: totalLiabilityValue"></div>
             <div class="date" data-bind="text: dataDate"></div>
         </div>
         </div>

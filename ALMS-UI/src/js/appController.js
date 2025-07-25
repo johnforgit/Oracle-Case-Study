@@ -35,6 +35,7 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojrespon
         { path: 'dashboard', detail: { label: 'Dashboard', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'gapGauge', detail: { label: 'Gap Gauge', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'assetDashBoard', detail: { label: 'Assets', iconClass: 'oj-ux-ico-bar-chart' } },
+        { path: 'liabilityDashBoard', detail: { label: 'Liabilities', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'dash1', detail: { label: 'VAR Analysis', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'dash2', detail: { label: 'Duration Gap', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'nimDashBoard', detail: { label: 'NIM DashBoard', iconClass: 'oj-ux-ico-bar-chart' } },
