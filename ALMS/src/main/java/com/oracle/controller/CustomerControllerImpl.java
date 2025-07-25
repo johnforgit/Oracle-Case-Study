@@ -16,8 +16,8 @@ import com.oracle.entities.Customer;
 import com.oracle.service.CustomerService;
 
 @RestController
-@CrossOrigin("*")
-@RequestMapping("/api")
+@CrossOrigin(origins="*")
+@RequestMapping("api")
 public class CustomerControllerImpl implements CustomerController {
 
     @Autowired
