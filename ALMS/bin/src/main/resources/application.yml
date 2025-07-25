@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: ReportingService
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/ALM
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+  boot:
+    admin:
+      client:
+        enabled: true
+        url: http://localhost:8091
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # Expose all actuator endpoints
+  endpoint:
+    health:
+      show-details: always
+    info:
+      enabled: true
+
+info:
+  app:
+    name: ALMS - Asset Liability Management System
+    version: 1.0.0
+    description: API for Risk and Performance Metrics in Financial Institutions
+
+logging:
+  level:
+    root: INFO
+    com.oracle: DEBUG
+
+eureka: 
+  instance:
+    hostname: ${vcap.application.uris[0]:localhost}
+    metadata-map:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+  client:
+    region: default
+    registry-fetch-interval-seconds: 5
+    service-url:
+      default-zone: http://localhost:8761/eureka/
