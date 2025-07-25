@@ -1,6 +1,9 @@
 
 
 <div class="grid-container">
+  <div class="chart-box">
+
+
   <div class="oj-flex">
   <!-- Date Picker -->
   <div class="oj-flex-item">
@@ -15,6 +18,28 @@
     </oj-input-date>
   </div>
 </div>
+
+<div class="gap-gauge-container">
+  <oj-status-meter-gauge 
+    class="gap-gauge"
+    value="[[value1]]"
+    min="-3000000"
+    max="3000000"
+    orientation="circular"
+    inner-radius="0.75"
+    start-angle="180"
+    angle-extent="180"
+    metric-label.rendered="on"
+    readonly="true"
+    color="[[gaugeColor2]]">
+  </oj-status-meter-gauge>
+
+  <div class="gap-label">
+    <div>Gap Type:</div>
+    <oj-bind-text value="[[gapType]]"></oj-bind-text>
+  </div>
+</div>
+  </div>
 
 <div class="chart-box">
   <div class="acr-gauge-container">
@@ -44,26 +69,7 @@
 </div>
 </div>
 
-<div class="gap-gauge-container">
-  <oj-status-meter-gauge 
-    class="gap-gauge"
-    value="[[value1]]"
-    min="-3000000"
-    max="3000000"
-    orientation="circular"
-    inner-radius="0.75"
-    start-angle="180"
-    angle-extent="180"
-    metric-label.rendered="on"
-    readonly="true"
-    color="[[gaugeColor2]]">
-  </oj-status-meter-gauge>
 
-  <div class="gap-label">
-    <div>Gap Type:</div>
-    <oj-bind-text value="[[gapType]]"></oj-bind-text>
-  </div>
-</div>
 
 </div>
 </div>

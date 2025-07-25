@@ -32,17 +32,17 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojrespon
 
       let navData = [
         { path: '', redirect: 'dashboard' },
-        { path: 'dashboard', detail: { label: 'Dashboard', iconClass: 'oj-ux-ico-bar-chart' } },
-        { path: 'gapGauge', detail: { label: 'Gap Gauge', iconClass: 'oj-ux-ico-bar-chart' } },
-        { path: 'assetDashBoard', detail: { label: 'Assets', iconClass: 'oj-ux-ico-bar-chart' } },
-        { path: 'liabilityDashBoard', detail: { label: 'Liabilities', iconClass: 'oj-ux-ico-bar-chart' } },
-        { path: 'dash1', detail: { label: 'VAR Analysis', iconClass: 'oj-ux-ico-bar-chart' } },
-        { path: 'dash2', detail: { label: 'Duration Gap', iconClass: 'oj-ux-ico-bar-chart' } },
+        { path: 'dashboard', detail: { label: 'Dashboard', iconClass: 'oj-ux-ico-dashboard-20' } },
+        // { path: 'gapGauge', detail: { label: 'Gap Gauge', iconClass: 'oj-ux-ico-bar-chart' } },
+        { path: 'assetDashBoard', detail: { label: 'Assets', iconClass: 'oj-ux-ico-money-analytics' } },
+        { path: 'liabilityDashBoard', detail: { label: 'Liabilities', iconClass: 'oj-ux-ico-trending-down' } },
+        { path: 'dash1', detail: { label: 'VAR Analysis', iconClass: 'oj-ux-ico-chart-line' } },
+        { path: 'dash2', detail: { label: 'Duration Gap', iconClass: 'oj-ux-ico-chart-gauge' } },
         { path: 'nimDashBoard', detail: { label: 'NIM DashBoard', iconClass: 'oj-ux-ico-bar-chart' } },
-        { path: 'liquidityChart', detail: { label: 'Liquidity Chart', iconClass: 'oj-ux-ico-bar-chart' } },
+        { path: 'liquidityChart', detail: { label: 'Liquidity Chart', iconClass: 'oj-ux-ico-chart-bar' } },
         // { path: 'incidents', detail: { label: 'Incidents', iconClass: 'oj-ux-ico-fire' } },
-        { path: 'customers', detail: { label: 'Customers', iconClass: 'oj-ux-ico-contact-group' } },
-        { path: 'assetCoverageGauge', detail: { label: 'ASC', iconClass: 'oj-ux-ico-information-s' } }
+        // { path: 'customers', detail: { label: 'Customers', iconClass: 'oj-ux-ico-contact-group' } },
+        { path: 'assetCoverageGauge', detail: { label: 'Asset Coverage Ratio', iconClass: 'oj-ux-ico-chart-gauge-odometer' } }
       ];
       // Router setup
       let router = new CoreRouter(navData, {
