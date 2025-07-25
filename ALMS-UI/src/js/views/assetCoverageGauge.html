@@ -1,4 +1,7 @@
-<div class="oj-flex">
+
+
+<div class="grid-container">
+  <div class="oj-flex">
   <!-- Date Picker -->
   <div class="oj-flex-item">
     <label for="acr-date">Select Date:</label>
@@ -13,7 +16,8 @@
   </div>
 </div>
 
-<div class="acr-gauge-container">
+<div class="chart-box">
+  <div class="acr-gauge-container">
   <oj-status-meter-gauge 
     value="[[acrValue]]"
     min="0"
@@ -23,7 +27,7 @@
     start-angle="180"
     angle-extent="180"
     metric-label.rendered="on"
-    color="[[gaugeColor]]"
+    color="[[gaugeColor1]]"
     label.text="Asset Coverage Ratio"
     readonly="true">
   </oj-status-meter-gauge>
@@ -37,5 +41,29 @@
   <div><strong>Intangible Assets (IA):</strong> <oj-bind-text value="[[ia]]"></oj-bind-text></div>
   <div><strong>Current Liabilities (CL):</strong> <oj-bind-text value="[[cl]]"></oj-bind-text></div>
   <div><strong>Total Debt:</strong> <oj-bind-text value="[[totalDebt]]"></oj-bind-text></div>
+</div>
+</div>
+
+<div class="gap-gauge-container">
+  <oj-status-meter-gauge 
+    class="gap-gauge"
+    value="[[value1]]"
+    min="-3000000"
+    max="3000000"
+    orientation="circular"
+    inner-radius="0.75"
+    start-angle="180"
+    angle-extent="180"
+    metric-label.rendered="on"
+    readonly="true"
+    color="[[gaugeColor2]]">
+  </oj-status-meter-gauge>
+
+  <div class="gap-label">
+    <div>Gap Type:</div>
+    <oj-bind-text value="[[gapType]]"></oj-bind-text>
+  </div>
+</div>
+
 </div>
 </div>

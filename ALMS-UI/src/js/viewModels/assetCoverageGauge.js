@@ -3,7 +3,7 @@ define(['knockout', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojgauge', 'ojs/ojdateti
     const self = this;
 
     self.acrValue = ko.observable(0);
-    self.gaugeColor = ko.observable('#0277bd');
+    self.gaugeColor1 = ko.observable('#0277bd');
     self.reportingDate = ko.observable("2025-06-30"); // Default date (ISO format)
     self.bvta = ko.observable(0);
     self.ia = ko.observable(0);
@@ -25,11 +25,11 @@ define(['knockout', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojgauge', 'ojs/ojdateti
   self.totalDebt(data.totalDebt);
 
           if (acr >= 2.0) {
-            self.gaugeColor('#2e7d32'); // Green
+            self.gaugeColor1('#2e7d32'); // Green
           } else if (acr >= 1.5) {
-            self.gaugeColor('#ffb300'); // Amber
+            self.gaugeColor1('#ffb300'); // Amber
           } else {
-            self.gaugeColor('#c62828'); // Red
+            self.gaugeColor1('#c62828'); // Red
           }
         })
         .catch(err => {
@@ -48,6 +48,31 @@ define(['knockout', 'ojs/ojcore', 'ojs/ojknockout', 'ojs/ojgauge', 'ojs/ojdateti
 
     return self;
   }
+  function GapGaugeViewModel() {
+    const self = this;
+    self.value1 = ko.observable(0);
+    self.gapType = ko.observable("Loading...");
 
-  return new AssetCoverageGaugeViewModel();
+    // Computed observable for dynamic color
+    self.gaugeColor2 = ko.computed(function () {
+      const type = self.gapType();
+      if (type === 'Asset-sensitive') return '#2e7d32';  // Green
+      if (type === 'Liability-sensitive') return '#c62828';  // Red
+      return '#0277bd';  // Default blue
+    });
+
+    // Fetch data from API
+    fetch("http://127.0.0.1:8081/api/gap-analysis")
+      .then(response => response.json())
+      .then(data => {
+        self.value1(data.gapValue);
+        self.gapType(data.gapType);
+      });
+
+    return self;
+  }
+
+  const ob1=new GapGaugeViewModel();
+  const ob2=new AssetCoverageGaugeViewModel();
+  return {...ob1,...ob2};
 });

@@ -16,9 +16,9 @@ define([
     self.selectedScenario = ko.observable("base");
     self.rateShock = ko.observable(0);
 
-    self.barGroups = ko.observableArray(["Bank A", "Bank B", "Bank C"]);
+    self.barGroups = ko.observableArray(["Bank A"]);
     self.barSeries = ko.observableArray([
-      { name: "NIM", items: [3.2, 2.8, 3.5] }
+      { name: "NIM", items: [3.2] }
     ]);
 
     self.simulate = function () {

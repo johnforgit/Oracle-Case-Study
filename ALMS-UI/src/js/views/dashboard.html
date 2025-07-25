@@ -1,55 +1,52 @@
 <!-- Top KPI Cards -->
 <div class="oj-flex oj-sm-justify-content-space-around oj-sm-margin-4x-vertical">
   <div class="dashboard-card">
-    <div class="dashboard-icon">
-</div>
+    <div class="dashboard-icon">🏦</div>
     <div class="dashboard-label">Total Assets</div>
-    <div class="dashboard-value">₹20,00,00,000</div>
+    <div class="dashboard-value">₹64,00,000</div>
   </div>
+
   <div class="dashboard-card">
-    <div class="dashboard-icon">
-</div>
+    <div class="dashboard-icon">💸</div>
     <div class="dashboard-label">Total Liabilities</div>
-    <div class="dashboard-value">₹15,00,00,000</div>
+    <div class="dashboard-value">₹53,80,000</div>
   </div>
+
   <div class="dashboard-card">
-    <div class="dashboard-icon">
-</div>
+    <div class="dashboard-icon">📈</div>
     <div class="dashboard-label">Net Interest Margin (NIM)</div>
     <div class="dashboard-value">3.25%</div>
     <oj-progress-bar value="3.25" max="5" type="determinate" class="dashboard-progress"></oj-progress-bar>
   </div>
+
   <div class="dashboard-card">
-    <div class="dashboard-icon">
-</div>
+    <div class="dashboard-icon">📊</div>
     <div class="dashboard-label">Liquidity Coverage Ratio (LCR)</div>
     <div class="dashboard-value">122%</div>
     <oj-progress-bar value="122" max="200" type="determinate" class="dashboard-progress"></oj-progress-bar>
   </div>
 </div>
+
 <!-- Middle Chart + Filters Row -->
 <div class="oj-flex oj-sm-flex-wrap">
   <!-- Filters Panel -->
   <div class="oj-sm-12 oj-md-4">
     <oj-form-layout>
-      <oj-input-date label-hint="Start Date" value="{{startDate}}"></oj-input-date>
-      <oj-input-date label-hint="End Date" value="{{endDate}}"></oj-input-date>
-      <oj-select-one label-hint="Scenario" value="{{selectedScenario}}">
-        <oj-option value="base">Base</oj-option>
-        <oj-option value="stress">Stress</oj-option>
-        <oj-option value="optimistic">Optimistic</oj-option>
-      </oj-select-one>
-      <oj-label for="rateShockSlider">Interest Rate Shock (%)</oj-label>
-      <oj-slider id="rateShockSlider"
-                 min="-3" max="3" step="0.25"
-                 value="{{rateShock}}"
-                 orientation="horizontal">
-      </oj-slider>
-      <oj-button on-oj-action="[[simulate]]">Simulate</oj-button>
-      <oj-button on-oj-action="[[exportCSV]]">Export CSV</oj-button>
-      <oj-button on-oj-action="[[exportPDF]]">Export PDF</oj-button>
-    </oj-form-layout>
+  <oj-input-date label-hint="Start Date" value="{{startDate}}"></oj-input-date>
+  <oj-input-date label-hint="End Date" value="{{endDate}}"></oj-input-date>
+
+  <!-- Horizontal Button Row with Spacing -->
+  <div class="oj-flex oj-sm-justify-content-flex-start oj-sm-margin-top">
+  <oj-button class="button-spacing" on-oj-action="[[simulate]]">Simulate</oj-button>
+  <oj-button class="button-spacing" on-oj-action="[[exportCSV]]">Export CSV</oj-button>
+  <oj-button on-oj-action="[[exportPDF]]">Export PDF</oj-button>
+</div>
+
+</oj-form-layout>
+
+
   </div>
+
   <!-- Bar Chart Comparison -->
   <div class="oj-sm-12 oj-md-8">
     <oj-chart type="bar"
