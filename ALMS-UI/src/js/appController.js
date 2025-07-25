@@ -32,12 +32,14 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojrespon
 
       let navData = [
         { path: '', redirect: 'dashboard' },
-        { path: 'gapGauge', detail: { label: 'Dashboard', iconClass: 'oj-ux-ico-bar-chart' } },
+        { path: 'dashboard', detail: { label: 'Dashboard', iconClass: 'oj-ux-ico-bar-chart' } },
+        { path: 'gapGauge', detail: { label: 'Gap Gauge', iconClass: 'oj-ux-ico-bar-chart' } },
+        { path: 'assetDashBoard', detail: { label: 'Assets', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'dash1', detail: { label: 'VAR Analysis', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'dash2', detail: { label: 'Duration Gap', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'nimDashBoard', detail: { label: 'NIM DashBoard', iconClass: 'oj-ux-ico-bar-chart' } },
         { path: 'liquidityChart', detail: { label: 'Liquidity Chart', iconClass: 'oj-ux-ico-bar-chart' } },
-        { path: 'incidents', detail: { label: 'Incidents', iconClass: 'oj-ux-ico-fire' } },
+        // { path: 'incidents', detail: { label: 'Incidents', iconClass: 'oj-ux-ico-fire' } },
         { path: 'customers', detail: { label: 'Customers', iconClass: 'oj-ux-ico-contact-group' } },
         { path: 'assetCoverageGauge', detail: { label: 'ASC', iconClass: 'oj-ux-ico-information-s' } }
       ];

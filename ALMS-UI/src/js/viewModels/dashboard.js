@@ -1,54 +1,58 @@
-/**
- * @license
- * Copyright (c) 2014, 2025, Oracle and/or its affiliates.
- * Licensed under The Universal Permissive License (UPL), Version 1.0
- * as shown at https://oss.oracle.com/licenses/upl/
- * @ignore
- */
-/*
- * Your dashboard ViewModel code goes here
- */
-define(['../accUtils'],
- function(accUtils) {
-    function DashboardViewModel() {
-      // Below are a set of the ViewModel methods invoked by the oj-module component.
-      // Please reference the oj-module jsDoc for additional information.
+define([
+  'knockout',
+  'ojs/ojchart',
+  'ojs/ojselectcombobox',
+  'ojs/ojdatetimepicker',
+  'ojs/ojformlayout',
+  'ojs/ojbutton',
+  'ojs/ojslider',
+  'ojs/ojprogress-bar'
+], function (ko) {
+  function AlmDashboardViewModel() {
+    const self = this;
 
-      /**
-       * Optional ViewModel method invoked after the View is inserted into the
-       * document DOM.  The application can put logic that requires the DOM being
-       * attached here.
-       * This method might be called multiple times - after the View is created
-       * and inserted into the DOM and after the View is reconnected
-       * after being disconnected.
-       */
-      this.connected = () => {
-        accUtils.announce('Dashboard page loaded.');
-        document.title = "Dashboard";
-        // Implement further logic if needed
-      };
+    self.startDate = ko.observable();
+    self.endDate = ko.observable();
+    self.selectedScenario = ko.observable("base");
+    self.rateShock = ko.observable(0);
 
-      /**
-       * Optional ViewModel method invoked after the View is disconnected from the DOM.
-       */
-      this.disconnected = () => {
-        // Implement if needed
-      };
+    self.barGroups = ko.observableArray(["Bank A", "Bank B", "Bank C"]);
+    self.barSeries = ko.observableArray([
+      { name: "NIM", items: [3.2, 2.8, 3.5] }
+    ]);
 
-      /**
-       * Optional ViewModel method invoked after transition to the new View is complete.
-       * That includes any possible animation between the old and the new View.
-       */
-      this.transitionCompleted = () => {
-        // Implement if needed
-      };
-    }
+    self.simulate = function () {
+      const shock = self.rateShock();
+      let baseNIMs = [3.2, 2.8, 3.5];
+      let adjusted = baseNIMs.map(nim => (nim + shock * 0.2).toFixed(2));
+      self.barSeries([{ name: `NIM (Shock ${shock}%)`, items: adjusted.map(Number) }]);
+    };
 
-    /*
-     * Returns an instance of the ViewModel providing one instance of the ViewModel. If needed,
-     * return a constructor for the ViewModel so that the ViewModel is constructed
-     * each time the view is displayed.
-     */
-    return DashboardViewModel;
+    // Export CSV
+    self.exportCSV = function () {
+      const headers = ["Bank", "NIM"];
+      const rows = self.barGroups().map((bank, i) => [bank, self.barSeries()[0].items[i]]);
+      let csv = [headers.join(",")].concat(rows.map(r => r.join(","))).join("\n");
+
+      let blob = new Blob([csv], { type: "text/csv" });
+      let a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "alm_metrics.csv";
+      a.click();
+    };
+
+    // Export PDF (very basic)
+    self.exportPDF = function () {
+      let win = window.open("", "", "height=600,width=800");
+      win.document.write("<h3>ALM Dashboard Export</h3>");
+      win.document.write("<ul>");
+      self.barGroups().forEach((bank, i) => {
+        win.document.write(`<li>${bank}: ${self.barSeries()[0].items[i]}</li>`);
+      });
+      win.document.write("</ul>");
+      win.print();
+    };
   }
-);
+
+  return new AlmDashboardViewModel();
+});

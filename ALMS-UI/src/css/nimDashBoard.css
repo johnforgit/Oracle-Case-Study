@@ -18,3 +18,10 @@
     gap: 30px;
     padding: 10px;
   }
+
+  h3 {
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  text-align: center;
+  margin-left: 10px;
+}

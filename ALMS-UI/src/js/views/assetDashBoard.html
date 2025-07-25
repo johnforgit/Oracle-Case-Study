@@ -1,0 +1,41 @@
+<div class="grid-container">
+    <div class="chart-box">
+        <h3 style="margin-bottom: 10px;">Asset Types</h2>
+        <div id="sampleDemo" class="demo-padding demo-container">
+        <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+                  
+          <div id="chart-container">
+            <oj-chart
+              id="pieChart"
+              type="pie"
+              data="[[dataProvider1]]"
+              animation-on-display="auto"
+              animation-on-data-change="auto"
+              hover-behavior="dim">
+              <template slot="itemTemplate" data-oj-as="item">
+                <oj-chart-item
+                  value="[[item.data.value]]"
+                  group-id="[[ [item.data.group] ]]"
+                  series-id="[[item.data.series]]"></oj-chart-item>
+              </template>
+            </oj-chart>
+          </div>
+          
+          
+          
+        </div>
+      </div>
+    </div>
+    <div class="chart-box">
+        <div class="asset-widget">
+        <div class="widget-header">Total Active Asset Value</div>
+        <div class="widget-body">
+            <div class="value" data-bind="text: totalAssetValue"></div>
+            <div class="date" data-bind="text: dataDate"></div>
+        </div>
+        </div>
+    </div>
+
+
+
+</div>
